@@ -1,7 +1,6 @@
 from application import app
 from middleware.josnWebToken.josn_web_token import jwt_wrapper
-from service.api.api_test_service import *
-from utils.Bean_check_factory import bean_check_wrapper
+from middleware.param_check.Bean_check_factory import bean_check_wrapper
 
 
 @app.route('/test')
