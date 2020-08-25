@@ -23,3 +23,17 @@ CORS_HEADERS = ",".join([
 ])
 CORS_RESOURCES = "*"
 CORS_MAX_AGE = timedelta(minutes=30)
+
+#  密钥
+SECRET_KEY = b"32rd5.329j$#j3f"
+
+#  token相关
+TOKEN_NAME = "token"
+TOKEN_EXPIRE_TIME = 20*60*60
+TOKEN_ALGORITHM = "HS256"
+TOKEN_ENCODE_TYPE = "utf-8"
+TOKEN_HEADERS = {
+    "alg": "HS256",
+    "typ": "JWT"
+}
+PAYLOAD_PARAM = "m_id"
