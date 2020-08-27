@@ -23,3 +23,6 @@ def main():
     else:
         linux_server()
 
+
+if __name__ == '__main__':
+    main()
