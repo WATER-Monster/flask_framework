@@ -1,6 +1,8 @@
 import json
 import functools
 from flask import request, g
+from controller.param_check_beans import beans
+from utils.response_generator import ResponseGenerator
 
 
 def check_params(bean):
@@ -42,8 +44,11 @@ def bean_check_wrapper(bean_name):
     def middle(func):
         @functools.wraps(func)
         def wrapper(*args, **kwargs):
-            bean = __import__(bean_name)
-            check_params(bean)
+            bean = getattr(beans, bean_name)
+            pc = check_params(bean)
+            if pc != 1:
+                response = ResponseGenerator.resp_fail(pc)
+                return response
             res = func(*args, **kwargs)
             return res
 

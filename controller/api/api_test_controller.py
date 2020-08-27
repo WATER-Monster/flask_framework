@@ -5,9 +5,9 @@ from service.api.api_test_service import api_test_service
 from utils.response_generator import ResponseGenerator
 
 
-@api.route('/test')
+@api.route('/test', methods=["POST"])
 @bean_check_wrapper("API_TEST_BEAN")
-@jwt_wrapper
+# @jwt_wrapper
 def api_test():
     msg = api_test_service()
     return ResponseGenerator.resp_ok(msg)
