@@ -28,14 +28,15 @@ def check_params(bean):
 
 
 def bean_param_check(req, bean):
+    g.data = dict()
     for param in bean:
         request_param = req.get(param)
-        if request_param is None or request_param.strip() == "":
+        if request_param is None or request_param == "":
             if bean.get(param) is not None:
-                g.param = bean.get(param)
+                g.data[param] = req.get(param)
             else:
                 return f"{param}为空"
-        g.param = req.get(param)
+        g.data[param] = req.get(param)
 
     return 1
 

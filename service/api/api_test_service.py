@@ -2,8 +2,7 @@ from flask import g
 
 
 def api_test_service():
-    name = g.get("name")
-    id = g.get("id")
+    print(g.data)
     # some sql
 
     return "ok"
