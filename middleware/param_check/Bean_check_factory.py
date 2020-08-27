@@ -37,7 +37,7 @@ def bean_param_check(req, bean):
 
     return 1
 
-
+#  带参装饰器
 def bean_check_wrapper(bean_name):
     def middle(func):
         @functools.wraps(func)

@@ -1,3 +1,6 @@
+from flask import jsonify
+
+
 class ResponseGenerator:
 
     @staticmethod
@@ -7,7 +10,7 @@ class ResponseGenerator:
         response["msg"] = msg
         if data is not None:
             response["data"] = data
-        return response
+        return jsonify(response)
 
     @staticmethod
     def resp_fail(msg="fail", data=None):
@@ -16,5 +19,5 @@ class ResponseGenerator:
         response["msg"] = msg
         if data is not None:
             response["data"] = data
-        return response
+        return jsonify(response)
 

@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_caching import Cache
 from flask_cors import CORS
 from config.constans import DEFAULT_SERVICE_NAME
 from config.constans import CORS_RESOURCES
@@ -8,7 +9,7 @@ from config.constans import CORS_MAX_AGE
 
 def app_instance():
     app = Flask(DEFAULT_SERVICE_NAME)
-    app.config.from_object("")
+    app.config.from_pyfile("config/config.py")
 
     register_blueprint(app)
     #  支持跨域

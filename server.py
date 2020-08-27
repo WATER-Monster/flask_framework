@@ -4,8 +4,7 @@ from application import app
 
 def linux_server():
     """Set running in Linux env."""
-    dirname = app.config.get("ROOT_DIR")
-    os.system("bash %s/start.sh %s" % (dirname, API_LOG_DIRNAME))
+    app.run(host=app.config.get("HOST"), port=app.config.get("PORT"))
 
 
 def windows_server():
