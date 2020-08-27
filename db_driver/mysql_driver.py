@@ -10,7 +10,7 @@ class Mysql_Driver:
         self.POOL = PooledDB(
             creator=pymysql,  # 使用链接数据库的模块
             maxconnections=MAXCONNECTIONS,
-            mincached=MINCACHED,  
+            mincached=MINCACHED,
             maxcached=MAXCACHED,
             maxshared=MAXSHARED,
             blocking=BLOCKING,

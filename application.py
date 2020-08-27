@@ -5,6 +5,7 @@ from config.constans import DEFAULT_SERVICE_NAME
 from config.constans import CORS_RESOURCES
 from config.constans import CORS_HEADERS
 from config.constans import CORS_MAX_AGE
+from controller.api import api
 
 
 def app_instance():
@@ -22,7 +23,7 @@ def app_instance():
 
 def register_blueprint(app):
     """Register Flask blueprint."""
-    app.register_blueprint(test, url_prefix="/test")
+    app.register_blueprint(api, url_prefix="/api")
 
 
 app = app_instance()
