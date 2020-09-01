@@ -27,30 +27,18 @@ class Mysql_Driver:
     def __new__(cls, *args, **kw):
         """
         启用单例模式
-        :param args:
-        :param kw:
-        :return: cls._instance
         """
         if not hasattr(cls, '_instance'):
             cls._instance = object.__new__(cls)
         return cls._instance
 
     def connect(self):
-        """
-        启动连接
-        :return:conn, cursor
-        """
         conn = self.POOL.connection()
         cursor = conn.cursor(cursor=pymysql.cursors.DictCursor)
         return conn, cursor
 
-    def connect_close(self,conn, cursor):
-        """
-        关闭连接
-        :param conn:
-        :param cursor:
-        :return: None
-        """
+    @staticmethod
+    def connect_close(conn, cursor):
         cursor.close()
         conn.close()
 

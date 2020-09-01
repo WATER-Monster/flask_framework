@@ -31,12 +31,13 @@ def bean_param_check(req, bean):
     g.data = dict()
     for param in bean:
         request_param = req.get(param)
-        if request_param is None or request_param == "":
-            if bean.get(param) is not None:
+        if request_param is None or request_param != "":
+            if isinstance(req.get(param), bean.get(param)):
                 g.data[param] = req.get(param)
             else:
-                return f"{param}为空"
-        g.data[param] = req.get(param)
+                return f"{param}'s type should be {bean.get(param)}, not {type(req.get(param))}"
+        else:
+            g.data[param] = req.get(param)
 
     return 1
 
