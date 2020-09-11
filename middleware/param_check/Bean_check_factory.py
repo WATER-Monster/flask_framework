@@ -12,13 +12,13 @@ def check_params(bean):
         msg = bean_param_check(req, bean)
         return msg
 
-    elif request.method == "POST" and request.content_type == "application/json":
+    elif request.method == "POST" and request.headers.get("Content-Type") == "application/json":
         req = request.get_data()
         req = json.loads(req)
         msg = bean_param_check(req, bean)
         return msg
 
-    elif request.method == "POST" and request.content_type == "application/x-www-form-urlencoded":
+    elif request.method == "POST" and request.headers.get("Content-Type") == "application/x-www-form-urlencoded":
         req = request.values
         msg = bean_param_check(req, bean)
         return msg
@@ -30,14 +30,10 @@ def check_params(bean):
 def bean_param_check(req, bean):
     g.data = dict()
     for param in bean:
-        request_param = req.get(param)
-        if request_param is None or request_param != "":
-            if isinstance(req.get(param), bean.get(param)):
-                g.data[param] = req.get(param)
-            else:
-                return f"{param}'s type should be {bean.get(param)}, not {type(req.get(param))}"
-        else:
+        if isinstance(req.get(param), bean.get(param)):
             g.data[param] = req.get(param)
+        else:
+            return f"{param}'s type should be {bean.get(param)}, not {type(req.get(param))}"
 
     return 1
 
