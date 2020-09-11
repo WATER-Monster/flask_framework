@@ -1,3 +1,4 @@
+import os
 from flask import Flask
 from flask_caching import Cache
 from flask_cors import CORS
@@ -9,7 +10,7 @@ from controller.api import api
 
 
 def app_instance():
-    app = Flask(DEFAULT_SERVICE_NAME)
+    app = Flask(root_path = os.getcwd(), import_name=DEFAULT_SERVICE_NAME)
     app.config.from_pyfile("config/config.py")
 
     register_blueprint(app)
