@@ -9,5 +9,8 @@ from utils.response_generator import ResponseGenerator
 @bean_check_wrapper("API_TEST_BEAN")
 # @jwt_wrapper
 def api_test():
-    msg = api_test_service()
-    return ResponseGenerator.resp_ok(msg)
+    status, msg = api_test_service()
+    if status is True:
+        return ResponseGenerator.resp_ok(msg)
+    else:
+        return ResponseGenerator.resp_fail(msg)

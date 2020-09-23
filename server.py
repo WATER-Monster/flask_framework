@@ -1,5 +1,4 @@
 import sys
-import os
 from application import app
 
 def linux_server():
