@@ -53,3 +53,8 @@ MYSQL_USER = 'root',
 MYSQL_PASSWORD = 'root',
 MYSQL_DATABASE = 'test',
 MYSQL_CHARSET = 'utf8'
+
+# redis 相关
+REDIS_HOST = "localhost"
+REDIS_PORT = 6379
+REDIS_SET_EX = 30

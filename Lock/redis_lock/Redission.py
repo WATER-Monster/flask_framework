@@ -1,3 +1,7 @@
+"""
+此处可替换为开源库 python-redis-lock
+"""
+
 import os
 import threading
 import time
@@ -12,9 +16,10 @@ class Redission:
     def lock(self, key, value, expire=30):
         is_lock = self.redis.get(key)
         if is_lock:
-            return -1
+            while True:
+                pass
         v = {"pid": self.pid, "value": value}
-        self.redis.set(key, v, expire)
+        self.redis.set_nx(key, v, expire)
         return 1
 
     def release(self, key):
