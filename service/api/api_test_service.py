@@ -1,11 +1,13 @@
 import redis_lock
+
+from Lock.lock_factory import Lock_Factory
 from db_driver.redis_driver import Redis_driver
 
 
 def api_test_service(data):
     redis = Redis_driver()
 
-    lock = redis_lock.Lock(redis.conn, "test-lock")
+    lock = Lock_Factory("test-lock").get_lock()
     # # 悲观锁
     # if lock.acquire(blocking=True,timeout=30):
     #     val = redis.get("test")
@@ -22,7 +24,7 @@ def api_test_service(data):
     # else:
     #     return False, "time out"
 
-    # 乐观锁 在并发抢购的模式中，乐观锁确实优秀些
+    # 乐观锁 在并发抢购的模式中，乐观锁确实优秀
     val = redis.get("test")
     if val is None:
         val = 0
