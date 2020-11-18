@@ -12,6 +12,7 @@ class Lock_Factory:
             _redis = Redis_driver()
             self._lock = redis_lock.Lock(_redis.conn, lock_name)
         except ConnectionError:
+            #  TODO mysql-lock 应在sql语句中使用 for update 控制加锁，难以抽象出来
             _mysql = Mysql_Driver()
             self._lock = Mysql_lock(_mysql, lock_name)
 

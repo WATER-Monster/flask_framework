@@ -28,7 +28,7 @@ CORS_MAX_AGE = timedelta(minutes=30)
 SECRET_KEY = b"32rd5.329j$#j3f"
 
 #  token相关
-TOKEN_NAME = "token"
+TOKEN_NAME = "Authorization"
 TOKEN_EXPIRE_TIME = 20*60*60
 TOKEN_ALGORITHM = "HS256"
 TOKEN_ENCODE_TYPE = "utf-8"
