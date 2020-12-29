@@ -11,8 +11,11 @@ API_POST_BEAN = {
 }
 
 API_HBC_BEAN = {
-    "url": str,
-    "param": dict,
-    "method": str,
-    "content_type": str
+    "user_name": str,
+    "pwd": int
+}
+
+API_LOGIN_GET = {
+    "user_name": str,
+    "pwd": str
 }

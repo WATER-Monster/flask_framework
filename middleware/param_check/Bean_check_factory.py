@@ -14,7 +14,10 @@ def check_params(bean):
 
     elif request.method == "POST" and request.headers.get("Content-Type") == "application/json":
         req = request.get_data()
-        req = json.loads(req)
+        try:
+            req = json.loads(req)
+        except json.decoder.JSONDecodeError:
+            return "param can not load as json"
         msg = bean_param_check(req, bean)
         return msg
 

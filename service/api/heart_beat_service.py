@@ -7,22 +7,12 @@ from gevent.threadpool import ThreadPoolExecutor
 
 
 def api_hbc_service(data):
-    url = data.get("url")
-    param = data.get("param")
-    method = data.get("method").lower()
-    content_type = data.get("Content-Type")
+    if data.get("user_name") == "admin" and data.get("pwd") == 123:
+        return True, "ok", {"code":100, "token":123}
+    return False, "user_name or pwd wrong", None
 
-    req = getattr(requests, method, None)
-    if req is None:
-        return "method not allowed"
 
-    if content_type == "application/json":
-        param = json.dumps(param)
-
-    # requests模块会把dict类型的参数自动转换为get或post类型的参数
-    t = threading.Thread(target=req)
-    t.start()
-    # future_res = pool.submit(req, (url, param))
-    # future_res.add_done_callback(lambda future:print(future.result()))
-
-    return True, "ok", None
+def api_login_get(data):
+    if data.get("user_name") == "admin" and data.get("pwd") == "123":
+        return True, "ok", {"code":100, "token":123}
+    return False, "user_name or pwd wrong", None
