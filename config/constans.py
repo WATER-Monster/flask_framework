@@ -47,11 +47,11 @@ BLOCKING = True  # 连接池中如果没有可用连接后，是否阻塞等待�
 MAXUSAGE = None  # 一个链接最多被重复使用的次数，None表示无限制
 SETSESSION = []  # 开始会话前执行的命令列表。如：["set datestyle to ...", "set time zone ..."]
 PING = 1,  # ping MySQL服务端，检查是否服务可用。# 如：0 = None = never, 1 = default = whenever it is requested, 2 = when a cursor is created, 4 = when a query is executed, 7 = always
-MYSQL_HOST = 'huameidb.mysql.database.chinacloudapi.cn'
+MYSQL_HOST = 'localhost'
 MYSQL_PORT = 3306
-MYSQL_USER = 'webuser@huameidb'
-MYSQL_PASSWORD = 'User@123'
-MYSQL_DATABASE = 'hm_test'
+MYSQL_USER = 'root'
+MYSQL_PASSWORD = '123'
+MYSQL_DATABASE = 'test'
 MYSQL_CHARSET = 'utf8'
 
 # redis 相关
