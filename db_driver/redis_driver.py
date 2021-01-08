@@ -3,6 +3,9 @@ from config.constans import REDIS_HOST, REDIS_PORT, REDIS_SET_EX
 
 
 class Redis_driver:
+    """
+    只提供redis连接池，加锁请使用Redlock红锁
+    """
     def __init__(self):
         pool = redis.ConnectionPool(host=REDIS_HOST, port=REDIS_PORT, decode_responses=True)
         self.conn = redis.StrictRedis(connection_pool=pool)

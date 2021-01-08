@@ -41,24 +41,30 @@ class Mysql_Driver:
         cursor.close()
         conn.close()
 
-    def fetchone(self, sql):
+    def fetchone(self, sql, *param):
+        """
+        所有execute执行的时候都必须把参数挂在execute函数的第二个参数里，而不是自己拼接字符串
+        为的是防止sql注入
+        :param sql:
+        :return:
+        """
         conn, cursor = self._connect()
-        cursor.execute(sql)
+        cursor.execute(sql, param)
         result = cursor.fetchone()
         self.connect_close(conn, cursor)
         return result
 
-    def fetchall(self, sql):
+    def fetchall(self, sql, *param):
         conn, cursor = self._connect()
-        cursor.execute(sql)
+        cursor.execute(sql, param)
         result = cursor.fetchall()
         self.connect_close(conn, cursor)
         return result
 
-    def execute_one(self, sql):
+    def execute_one(self, sql, *param):
         conn, cursor = self._connect()
         try:
-            cursor.execute_one(sql)
+            cursor.execute(sql, param)
             conn.commit()
         except Base_Exception:
             conn.rollback()
