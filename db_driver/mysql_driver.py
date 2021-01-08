@@ -73,25 +73,30 @@ class Mysql_Driver:
         self.connect_close(conn, cursor)
         return True
 
-    def begin(self):
-        """
-        事务开始
-        实际上pymysql一直都是autocommit(0)，所以写个begin在代码层面上没有意义
-        但在结构层面可以标志这是一个事务，便于代码理解
-        :return: conn, cursor 使用begin开始的事务，使用cursor.execute()执行sql
-        """
+    def execute_without_commit(self, sql, *param):
         conn, cursor = self._connect()
-        return conn, cursor
+        cursor.execute(sql, param)
 
-    def end(self, conn, cursor):
+    class Transaction:
         """
-        事务结束
-        :return:
+        事务开关，使用方式 with Transaction() as t:
         """
-        try:
-            conn.commit()
-        except Exception:
-            conn.rollback()
-            self.connect_close(conn, cursor)
+        def __enter__(self):
+            db_instance = Mysql_Driver()
+            self.conn, self.cursor = db_instance._connect()
+            return self
+
+        def __exit__(self, exc_type, exc_val, exc_tb):
+            try:
+                if exc_type:
+                    raise exc_type
+                self.conn.commit()
+            except Exception:
+                self.conn.rollback()
+            finally:
+                Mysql_Driver.connect_close(self.conn, self.cursor)
+
+        def t_execute(self, sql, *param):
+            self.cursor.execute(sql, param)
 
 db = Mysql_Driver()
