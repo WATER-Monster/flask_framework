@@ -2,19 +2,20 @@
 
 import logging
 import os
+from config.constans import DEFAULT_SERVICE_NAME
 
 
 class LogModule:
 
     def __init__(self):
-        self.logger = logging.getLogger('huamei')
+        self.logger = logging.getLogger(DEFAULT_SERVICE_NAME)
         self.logger.setLevel(logging.DEBUG)  # Log等级总开关
 
         logfile = os.path.join('log', 'mainlog.log')
         if not os.path.exists(logfile):
             os.mkdir(os.path.join(os.getcwd(),'log'))
 
-        if not self.logger.handlers:
+        if not self.logger.handlers: #  句柄只需要创建一次，相当于是个单例效果
             fh = logging.FileHandler(logfile, mode='a')
             fh.setLevel(logging.DEBUG)  # 输出到file的log等级的开关
 

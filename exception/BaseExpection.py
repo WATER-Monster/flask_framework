@@ -1,5 +1,5 @@
 from flask import jsonify
-from fralog.FraLog import LogModule
+from logFactory.log_module import LogModule
 from utils.response_generator import ResponseGenerator
 
 log = LogModule()
