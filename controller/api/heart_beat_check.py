@@ -16,3 +16,9 @@ def heart_beat_check():
 def login_get():
     status, msg, data = api_login_get(g.data)
     return ResponseGenerator.make_response(status, msg, data)
+
+@api.route("/post_file", methods=["POST"])
+@bean_check_wrapper("API_POST_FILE")
+def post_file():
+    status, msg, data = file_test_service(g.data)
+    return ResponseGenerator.make_response(status, msg, data)

@@ -1,3 +1,5 @@
+from werkzeug.datastructures import FileStorage
+
 API_TEST_BEAN = {
     "name": str,
     # "id": int
@@ -18,4 +20,10 @@ API_HBC_BEAN = {
 API_LOGIN_GET = {
     "user_name": str,
     "pwd": str
+}
+
+API_POST_FILE = {
+    "file": FileStorage,
+    "file2":FileStorage,
+    "p":str
 }

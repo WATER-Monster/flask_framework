@@ -1,4 +1,5 @@
 import json
+import re
 import functools
 from flask import request, g
 from controller.param_check_beans import beans
@@ -17,13 +18,21 @@ def check_params(bean):
         try:
             req = json.loads(req)
         except json.decoder.JSONDecodeError:
-            return "param can not load as json"
+            return "param could not load as json"
         msg = bean_param_check(req, bean)
         return msg
 
     elif request.method == "POST" and request.headers.get("Content-Type") == "application/x-www-form-urlencoded":
         req = request.values
         msg = bean_param_check(req, bean)
+        return msg
+
+    elif request.method == "POST" and re.search(r"multipart/form-data", request.headers.get("Content-Type")):
+        files = request.files
+        param = request.form
+        f = files.to_dict()
+        f.update(param.to_dict())
+        msg = bean_param_check(f, bean)
         return msg
 
     else:

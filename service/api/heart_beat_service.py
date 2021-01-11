@@ -18,3 +18,8 @@ def api_login_get(data):
         t.t_execute("update test set name=888 where name=%s", 333)
 
     return True, "ok", None
+
+def file_test_service(data):
+    file_name = data.get("file")
+    f2 = data.get("file2")
+    return True, "ok", None
